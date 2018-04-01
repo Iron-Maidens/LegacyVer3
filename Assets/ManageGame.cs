@@ -38,6 +38,7 @@ public class ManageGame : MonoBehaviour
     public Image imgReceivedItem2r;
     public Image imgReceivedItem;
 
+    public List<GameObject> eventPane;
     public GameObject paneUpLevel;
     static public int indexCountry;
 
@@ -67,6 +68,8 @@ public class ManageGame : MonoBehaviour
         paneRecieveItem.active = false;
         paneRecieveItem2.active = false;
         paneUpLevel.active = false;
+        for (int i = 0; i < 7; i++)
+            eventPane[i].active = false;
         image1 = item1.GetComponent<Image>();
         image2 = item2.GetComponent<Image>();
 
@@ -206,7 +209,7 @@ public class ManageGame : MonoBehaviour
             paneUpLevel.active = true;
 
         }
-
+       
         if (chkEventList[0] == 0 && chkItemList[31] == 1 && chkItemList[39] == 1 && relation[6] >= 3)
         {
             eventChk = 1;
@@ -217,6 +220,7 @@ public class ManageGame : MonoBehaviour
             chkEventList[0] = 1;
 
             //pop up event 0
+            eventPane[0].active = true;
         }
 
         if (chkEventList[1] == 0 && chkItemList[30] == 1 && chkItemList[39] == 1 && chkItemList[41] == 1 && relation[8] >= 3)
@@ -228,6 +232,7 @@ public class ManageGame : MonoBehaviour
             chkEventList[1] = 1;
 
             //pop up event 1
+            eventPane[1].active = true;
         }
 
         if (chkEventList[2] == 0 && chkItemList[13] == 1)
@@ -239,6 +244,7 @@ public class ManageGame : MonoBehaviour
             }
             chkEventList[2] = 1;
             //pop up event 2 rice
+            eventPane[2].active = true;
         }
 
         if (chkEventList[3] == 0 && chkItemList[43] == 1)
@@ -248,6 +254,7 @@ public class ManageGame : MonoBehaviour
             if (relation[6] < 3) relation[6] += 1;
             chkEventList[3] = 1;
             //pop up event 3 pra ra
+            eventPane[3].active = true;
         }
 
         if (chkEventList[4] == 0 && chkItemList[34] == 1 && chkItemList[35] == 1 && relation[1] == 3)
@@ -258,15 +265,17 @@ public class ManageGame : MonoBehaviour
             indexAllInventory[curentNumberItem++] = 46;
 
             chkEventList[4] = 1;
-            //pop up event 1
+            //pop up event 4
+            eventPane[4].active = true;
         }
 
-        if (chkEventList[5] == 0 && chkItemList[43] == 1)
+        if (chkEventList[5] == 0 && chkItemList[43] == 1 && false)
         {
             eventChk = 1;
             if (relation[0] < 3) relation[0] += 1;
             //pop up event 5 corpse
             chkEventList[5] = 1;
+            eventPane[5].active = true;
         }
 
         if (chkEventList[6] == 0 && chkItemList[4] == 1 && chkItemList[15] == 1)
@@ -275,6 +284,7 @@ public class ManageGame : MonoBehaviour
             if (relation[6] < 3) relation[6] += 1;
             //pop up event 5 buffalo
             chkEventList[6] = 1;
+            eventPane[6].active = true;
         }
 
         if (eventChk == 1)
