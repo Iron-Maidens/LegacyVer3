@@ -26,6 +26,8 @@ public class ManageGame : MonoBehaviour
     public Text level_text;
     public Text itemNum_text;
 
+    public Text popUpDescription;
+
     int[] relation = new int[10];
     public List<string> countries;
     public Text countryText;
@@ -60,7 +62,6 @@ public class ManageGame : MonoBehaviour
     string[] itemDescription = new string[60];
 
 
-
     void Start()
     {
         itemDescription[0] = "ดินเป็นวัตถุที่เกิดขึ้นตามธรรมชาติ จากการสลายตัวของหินและแร่ รวมกับสารอินทรีย์ ดินแต่ละพื้นฐานที่มีความแตกต่างกันออกไปตามสภาพภูมิประเทศ วัตถุต้นกำเนิด ดินนั้นมีประโยชน์มากมาย เช่น ใช้สำหรับเพาะปลูก สามารถทำเป็นที่อยู่อาศัยของสิ่งมีชีวิต เป็นต้น";
@@ -71,7 +72,7 @@ public class ManageGame : MonoBehaviour
         itemDescription[5] = "ไก่เป็นสัตว์ปีกจำพวกนก หากินตามพื้นดิน ตกไข่ก่อนแล้วจึงฟักเป็นตัว ไก่นิยมนำมาประกอบอาหารได้หลากหลายรูปแบบ";
         itemDescription[6] = "วัวเป็นสัตว์เลี้ยงขนาดใหญ่ที่สามัญที่สุด วัวถูกเลี้ยงเป็นปศุสัตว์เพื่อเอาเนื้อ นมและผลิตภัณฑ์นมอื่นๆ และเป็นสัตว์ลากเทียม ผลิตภัณฑ์อื่นจากวัวมีหนังและมูลเพื่อใช้เป็นปุ๋ยคอกหรือเชื้อเพลิง";
         itemDescription[7] = "มูลสัตว์เป็นของเหลือที่เกิดจากระบบทางเดินอาหารของสิ่งมีชีวิต สามรถนำมาเป็นปุ๋ยอินทรีย์ในการเพาะปลูกได้";
-        itemDescription[8] = "ดินเหนียวเป็นดินที่มีเนื้อละเอียด มีการระบายน้ำและอากาศไม่ดีแต่สามารถอุ้มน้ำได้ ดูดยึดและแลกเปลี่ยนธาตอาหารพืชได้ดี เหมาะที่จะใช้ทำนาปลูกข้าวเพราะเก็บน้ำได้นาน";
+        itemDescription[8] = "\tดินเหนียวเป็นดินที่มีเนื้อละเอียด มีการระบายน้ำและอากาศไม่ดีแต่สามารถอุ้มน้ำได้ ดูดยึดและแลกเปลี่ยนธาตุอาหารพืชได้ดี เหมาะที่จะใช้ทำนาปลูกข้าวเพราะเก็บน้ำได้นาน";
         itemDescription[9] = "ทุ่งนาเป็นบริเวณที่นาที่มีการเพาะปลูกข้าว";
         itemDescription[10] = "ปุ๋ย เป็นผลผลิตทางการเกษตรทีเป็นแหล่งอาหารที่ช่วยให้ผลผลิตทางการเกษตรให้สูงขึ้น ใช้สำหรับใส่ลงในดินเพื่อให้ธาตุอาหารแก่พืช";
         itemDescription[11] = "เมล็ดพืชพันธุ์ (Seed) คือ เมล็ดพืชที่มีชีวิตซึ่งเมื่อนำไปปลูก หรือนำไปขยายพันธุ์แล้วจะได้ต้นที่เจริญงอกงามตรงตามพันธุกรรมของพืชนั้น";
@@ -132,7 +133,7 @@ public class ManageGame : MonoBehaviour
             {
                 listImgItem = listItem[i].GetComponent<Image>();
 
-                if(i > 6)
+                if (i > 6)
                 {
                     listImgItem.sprite = listAllImgItem[47];
                 }
@@ -142,7 +143,7 @@ public class ManageGame : MonoBehaviour
                     currentHaveItem[i] = listAllImgItem[i];
                     indexAllInventory[i] = i;
                 }
-              
+
             }
             currentHaveItem[6] = listAllImgItem[6];
             currentHaveItem[7] = listAllImgItem[47];
@@ -206,7 +207,7 @@ public class ManageGame : MonoBehaviour
                     listImgItem.sprite = listAllImgItem[47];
                 }
                 else
-                listImgItem.sprite = listAllImgItem[i];
+                    listImgItem.sprite = listAllImgItem[i];
             }
 
             numbers = JsonHelper.getJsonArray<int>(f3);
@@ -487,9 +488,13 @@ public class ManageGame : MonoBehaviour
             {
                 currentHaveItem[curentNumberItem] = listAllImgItem[z];
                 chkItemList[z] = 1;
+                popUpDescription.text = ThaiFontAdjuster.Adjust(itemDescription[z]);
+
                 indexAllInventory[curentNumberItem++] = z;
                 paneRecieveItem.active = true;
                 imgReceivedItem.sprite = listAllImgItem[z];
+
+                //pop up item
 
                 //write json
                 path = Application.persistentDataPath + "list.json";
@@ -521,6 +526,7 @@ public class ManageGame : MonoBehaviour
                 paneRecieveItem2.active = true;
                 imgReceivedItem2.sprite = listAllImgItem[z];
                 imgReceivedItem2r.sprite = listAllImgItem[k];
+                //pop up item
             }
 
         }
