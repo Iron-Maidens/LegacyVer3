@@ -45,7 +45,7 @@ public class ManageGame : MonoBehaviour
     Image image1, image2, listImgItem;
     bool statusItem1 = false;
     bool statusItem2 = false;
-
+    int itemNumber = 8; // count List
     // json var
     string json;
     string path;
@@ -128,12 +128,21 @@ public class ManageGame : MonoBehaviour
 
         if (!File.Exists(Application.persistentDataPath + "list.json"))
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < itemNumber; i++)
             {
                 listImgItem = listItem[i].GetComponent<Image>();
-                listImgItem.sprite = listAllImgItem[i];
-                currentHaveItem[i] = listAllImgItem[i];
-                indexAllInventory[i] = i;
+
+                if(i > 6)
+                {
+                    listImgItem.sprite = listAllImgItem[47];
+                }
+                else
+                {
+                    listImgItem.sprite = listAllImgItem[i];
+                    currentHaveItem[i] = listAllImgItem[i];
+                    indexAllInventory[i] = i;
+                }
+              
             }
             currentHaveItem[6] = listAllImgItem[6];
             currentHaveItem[7] = listAllImgItem[47];
@@ -172,7 +181,7 @@ public class ManageGame : MonoBehaviour
             pathChkEventList = Application.persistentDataPath + "chkEventList.json";
             pathRelation = Application.persistentDataPath + "relation.json";
 
-
+            Debug.Log(Application.persistentDataPath);
             string f1 = File.ReadAllText(path);
             string f2 = File.ReadAllText(pathCurrentIndexitem);
             string f3 = File.ReadAllText(pathChkEventList);
@@ -189,9 +198,14 @@ public class ManageGame : MonoBehaviour
                 currentHaveItem[i] = listAllImgItem[numbers[i]];
             }
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < itemNumber; i++)
             {
                 listImgItem = listItem[i].GetComponent<Image>();
+                if (i > 6)
+                {
+                    listImgItem.sprite = listAllImgItem[47];
+                }
+                else
                 listImgItem.sprite = listAllImgItem[i];
             }
 
@@ -371,7 +385,7 @@ public class ManageGame : MonoBehaviour
     public void upDateList()
     {
         int count = 0;
-        for (int i = currentIndex; i < currentIndex + 6; i++)
+        for (int i = currentIndex; i < currentIndex + itemNumber; i++)
         {
             listImgItem = listItem[count++].GetComponent<Image>();
             listImgItem.sprite = currentHaveItem[i];
@@ -380,7 +394,7 @@ public class ManageGame : MonoBehaviour
 
     public void downList()
     {
-        if (6 + currentIndex < curentNumberItem) currentIndex++;
+        if (itemNumber + currentIndex < curentNumberItem) currentIndex++;
         upDateList();
     }
 
