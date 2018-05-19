@@ -57,7 +57,7 @@ public class ManageGame : MonoBehaviour
     string pathChkEventList;
     string jsonRelation;
     string pathRelation;
-    string[] itemDescription = new string[3];
+    string[] itemDescription = new string[60];
 
 
 
