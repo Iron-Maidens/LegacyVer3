@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 7a4c9a888a027814e87296000fe3e347
+timeCreated: 1454159000
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Norasi
+  fontNames:
+  - Norasi
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 14e4f1fd302790444b92953ca92a5d86, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
