@@ -243,6 +243,215 @@ public class ManageGame : MonoBehaviour
         countryText.text = countries[indexCountry];
         imgRelation.sprite = levelRelation[relation[indexCountry]];
 
+        //chkEventPopup();
+
+        if (eventChk == 1)
+        {
+            //write json
+            pathChkEventList = Application.persistentDataPath + "chkEventList.json";
+            pathRelation = Application.persistentDataPath + "relation.json";
+
+            json = JsonHelper.arrayToJson(chkEventList);
+            File.WriteAllText(pathChkEventList, json);
+
+            json = JsonHelper.arrayToJson(relation);
+            File.WriteAllText(pathRelation, json);
+
+            path = Application.persistentDataPath + "list.json";
+            pathCurrentIndexitem = Application.persistentDataPath + "currentIndex.json";
+
+            json = JsonHelper.arrayToJson(indexAllInventory);
+            File.WriteAllText(path, json);
+
+            curentNumberItemJson[0] = curentNumberItem;
+            curentNumberItemJson[1] = level;
+            jsonCurrentIndexitem = JsonHelper.arrayToJson(curentNumberItemJson);
+            File.WriteAllText(pathCurrentIndexitem, jsonCurrentIndexitem);
+
+            eventChk = 0;
+        }
+
+    }
+
+    public void upDateList()
+    {
+        int count = 0;
+        for (int i = currentIndex; i < currentIndex + itemNumber; i++)
+        {
+            listImgItem = listItem[count++].GetComponent<Image>();
+            listImgItem.sprite = currentHaveItem[i];
+        }
+    }
+
+    public void downList()
+    {
+        if (itemNumber + currentIndex < curentNumberItem) currentIndex++;
+        upDateList();
+    }
+
+    public void upList()
+    {
+        if (currentIndex > 0) currentIndex--;
+        upDateList();
+    }
+
+    public void setNullItem(int i)
+    {
+        if (i == 1)
+        {
+            image1.sprite = nullImg;
+            statusItem1 = false;
+        }
+        if (i == 2)
+        {
+            image2.sprite = nullImg;
+            statusItem2 = false;
+        }
+    }
+
+    int combineItem1, combineItem2;
+    public void insertItem(int i)
+    {
+        if (!statusItem1)
+        {
+            image1.sprite = currentHaveItem[i];
+            combineItem1 = indexAllInventory[i];
+            statusItem1 = true;
+        }
+        else if (!statusItem2)
+        {
+            image2.sprite = currentHaveItem[i];
+            combineItem2 = indexAllInventory[i];
+            statusItem2 = true;
+            combineItem();
+
+        }
+        
+    }
+    public void combineItem()
+    {
+
+        int swip;
+        if (combineItem2 < combineItem1)
+        {
+            swip = combineItem2;
+            combineItem2 = combineItem1;
+            combineItem1 = swip;
+        }
+        for (int u = 0; u < 15; u++)
+        {
+            // Debug.Log(u + " " + chkItemList[u] + "\n");
+        }
+        formula(2, 4, 7);
+        formula(0, 0, 8);
+        formula(1, 8, 9);
+        formula(7, 7, 10);
+        formula(0, 2, 11);
+        formula(0, 11, 14);
+        formula(9, 14, 23);
+        formula(10, 23, 13);
+        formula(2, 2, 12);
+        formula2(13, 17, 15, 16);
+        formula(41, 1, 24);
+        formula(20, 18, 21);
+        formula(12, 18, 25);
+        formula(16, 1, 27);
+        formula(27, 1, 28);
+        formula2(3, 47, 29, 30);
+        formula(29, 32, 43);
+        formula(6, 18, 31);
+        formula(47, 48, 32);
+        formula(37, 1, 33);
+        formula(29, 42, 34);
+        formula(5, 5, 36);
+        formula(15, 1, 26);
+        formula(16, 19, 35);
+        formula(3, 3, 22);
+
+    }
+    int[] curentNumberItemJson = new int[2];
+    public void formula(int x, int y, int z)
+    {
+
+        if (chkItemList[z] == 0)
+        {
+            if (combineItem1 == x && combineItem2 == y)
+            {
+                currentHaveItem[curentNumberItem] = listAllImgItem[z];
+                chkItemList[z] = 1;
+                indexAllInventory[curentNumberItem++] = z;
+                chkEventPopup();
+
+
+                //pop up item
+                paneRecieveItem.active = true;
+                imgReceivedItem.sprite = listAllImgItem[z];
+                popUpDescription.text = ThaiFontAdjuster.Adjust(itemDescription[z]);
+
+                
+
+                //write json
+                path = Application.persistentDataPath + "list.json";
+                pathCurrentIndexitem = Application.persistentDataPath + "currentIndex.json";
+
+                json = JsonHelper.arrayToJson(indexAllInventory);
+                File.WriteAllText(path, json);
+
+                curentNumberItemJson[0] = curentNumberItem;
+                curentNumberItemJson[1] = level;
+                jsonCurrentIndexitem = JsonHelper.arrayToJson(curentNumberItemJson);
+                File.WriteAllText(pathCurrentIndexitem, jsonCurrentIndexitem);
+
+            }
+        }
+       
+    }
+
+    public void formula2(int x, int y, int z, int k)
+    {
+
+        if (chkItemList[z] == 0)
+        {
+            if (combineItem1 == x && combineItem2 == y)
+            {
+                currentHaveItem[curentNumberItem] = listAllImgItem[z];
+                chkItemList[z] = 1;
+                indexAllInventory[curentNumberItem++] = z;
+                Debug.Log("555555555555");
+                paneRecieveItem2.active = true;
+                imgReceivedItem2.sprite = listAllImgItem[z];
+                imgReceivedItem2r.sprite = listAllImgItem[k];
+                //pop up item
+            }
+
+        }
+
+        if (chkItemList[k] == 0)
+        {
+            if (combineItem1 == x && combineItem2 == y)
+            {
+                currentHaveItem[curentNumberItem] = listAllImgItem[k];
+                chkItemList[k] = 1;
+                indexAllInventory[curentNumberItem++] = k;
+            }
+        }
+
+        //write json
+        path = Application.persistentDataPath + "list.json";
+        pathCurrentIndexitem = Application.persistentDataPath + "currentIndex.json";
+
+        json = JsonHelper.arrayToJson(indexAllInventory);
+        File.WriteAllText(path, json);
+
+        curentNumberItemJson[0] = curentNumberItem;
+        curentNumberItemJson[1] = level;
+        jsonCurrentIndexitem = JsonHelper.arrayToJson(curentNumberItemJson);
+        File.WriteAllText(pathCurrentIndexitem, jsonCurrentIndexitem);
+
+    }
+
+    public void chkEventPopup()
+    {
         // level up 1
         if (level == 1 && chkEventList[2] == 1)
         {
@@ -354,205 +563,6 @@ public class ManageGame : MonoBehaviour
             chkEventList[6] = 1;
             eventPane[6].active = true;
         }
-
-        if (eventChk == 1)
-        {
-            //write json
-            pathChkEventList = Application.persistentDataPath + "chkEventList.json";
-            pathRelation = Application.persistentDataPath + "relation.json";
-
-            json = JsonHelper.arrayToJson(chkEventList);
-            File.WriteAllText(pathChkEventList, json);
-
-            json = JsonHelper.arrayToJson(relation);
-            File.WriteAllText(pathRelation, json);
-
-            path = Application.persistentDataPath + "list.json";
-            pathCurrentIndexitem = Application.persistentDataPath + "currentIndex.json";
-
-            json = JsonHelper.arrayToJson(indexAllInventory);
-            File.WriteAllText(path, json);
-
-            curentNumberItemJson[0] = curentNumberItem;
-            curentNumberItemJson[1] = level;
-            jsonCurrentIndexitem = JsonHelper.arrayToJson(curentNumberItemJson);
-            File.WriteAllText(pathCurrentIndexitem, jsonCurrentIndexitem);
-
-            eventChk = 0;
-        }
-
-    }
-
-    public void upDateList()
-    {
-        int count = 0;
-        for (int i = currentIndex; i < currentIndex + itemNumber; i++)
-        {
-            listImgItem = listItem[count++].GetComponent<Image>();
-            listImgItem.sprite = currentHaveItem[i];
-        }
-    }
-
-    public void downList()
-    {
-        if (itemNumber + currentIndex < curentNumberItem) currentIndex++;
-        upDateList();
-    }
-
-    public void upList()
-    {
-        if (currentIndex > 0) currentIndex--;
-        upDateList();
-    }
-
-    public void setNullItem(int i)
-    {
-        if (i == 1)
-        {
-            image1.sprite = nullImg;
-            statusItem1 = false;
-        }
-        if (i == 2)
-        {
-            image2.sprite = nullImg;
-            statusItem2 = false;
-        }
-    }
-
-    int combineItem1, combineItem2;
-    public void insertItem(int i)
-    {
-        if (!statusItem1)
-        {
-            image1.sprite = currentHaveItem[i];
-            combineItem1 = indexAllInventory[i];
-            statusItem1 = true;
-        }
-        else if (!statusItem2)
-        {
-            image2.sprite = currentHaveItem[i];
-            combineItem2 = indexAllInventory[i];
-            statusItem2 = true;
-            combineItem();
-
-        }
-    }
-    public void combineItem()
-    {
-
-        int swip;
-        if (combineItem2 < combineItem1)
-        {
-            swip = combineItem2;
-            combineItem2 = combineItem1;
-            combineItem1 = swip;
-        }
-        for (int u = 0; u < 15; u++)
-        {
-            // Debug.Log(u + " " + chkItemList[u] + "\n");
-        }
-        formula(2, 4, 7);
-        formula(0, 0, 8);
-        formula(1, 8, 9);
-        formula(7, 7, 10);
-        formula(0, 2, 11);
-        formula(0, 11, 14);
-        formula(9, 14, 23);
-        formula(10, 23, 13);
-        formula(2, 2, 12);
-        formula2(13, 17, 15, 16);
-        formula(41, 1, 24);
-        formula(20, 18, 21);
-        formula(12, 18, 25);
-        formula(16, 1, 27);
-        formula(27, 1, 28);
-        formula2(3, 47, 29, 30);
-        formula(29, 32, 43);
-        formula(6, 18, 31);
-        formula(47, 48, 32);
-        formula(37, 1, 33);
-        formula(29, 42, 34);
-        formula(5, 5, 36);
-        formula(15, 1, 26);
-        formula(16, 19, 35);
-        formula(3, 3, 22);
-
-    }
-    int[] curentNumberItemJson = new int[2];
-    public void formula(int x, int y, int z)
-    {
-
-        if (chkItemList[z] == 0)
-        {
-            if (combineItem1 == x && combineItem2 == y)
-            {
-                currentHaveItem[curentNumberItem] = listAllImgItem[z];
-                chkItemList[z] = 1;
-                popUpDescription.text = ThaiFontAdjuster.Adjust(itemDescription[z]);
-
-                indexAllInventory[curentNumberItem++] = z;
-                paneRecieveItem.active = true;
-                imgReceivedItem.sprite = listAllImgItem[z];
-
-                //pop up item
-
-                //write json
-                path = Application.persistentDataPath + "list.json";
-                pathCurrentIndexitem = Application.persistentDataPath + "currentIndex.json";
-
-                json = JsonHelper.arrayToJson(indexAllInventory);
-                File.WriteAllText(path, json);
-
-                curentNumberItemJson[0] = curentNumberItem;
-                curentNumberItemJson[1] = level;
-                jsonCurrentIndexitem = JsonHelper.arrayToJson(curentNumberItemJson);
-                File.WriteAllText(pathCurrentIndexitem, jsonCurrentIndexitem);
-
-            }
-        }
-    }
-
-    public void formula2(int x, int y, int z, int k)
-    {
-
-        if (chkItemList[z] == 0)
-        {
-            if (combineItem1 == x && combineItem2 == y)
-            {
-                currentHaveItem[curentNumberItem] = listAllImgItem[z];
-                chkItemList[z] = 1;
-                indexAllInventory[curentNumberItem++] = z;
-                Debug.Log("555555555555");
-                paneRecieveItem2.active = true;
-                imgReceivedItem2.sprite = listAllImgItem[z];
-                imgReceivedItem2r.sprite = listAllImgItem[k];
-                //pop up item
-            }
-
-        }
-
-        if (chkItemList[k] == 0)
-        {
-            if (combineItem1 == x && combineItem2 == y)
-            {
-                currentHaveItem[curentNumberItem] = listAllImgItem[k];
-                chkItemList[k] = 1;
-                indexAllInventory[curentNumberItem++] = k;
-            }
-        }
-
-        //write json
-        path = Application.persistentDataPath + "list.json";
-        pathCurrentIndexitem = Application.persistentDataPath + "currentIndex.json";
-
-        json = JsonHelper.arrayToJson(indexAllInventory);
-        File.WriteAllText(path, json);
-
-        curentNumberItemJson[0] = curentNumberItem;
-        curentNumberItemJson[1] = level;
-        jsonCurrentIndexitem = JsonHelper.arrayToJson(curentNumberItemJson);
-        File.WriteAllText(pathCurrentIndexitem, jsonCurrentIndexitem);
-
     }
 
     public void onClickList(int indexList)
