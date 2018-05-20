@@ -323,6 +323,31 @@ public class ManageGame : MonoBehaviour
         }
     }
 
+    public void deleteJson()
+    {
+        if (File.Exists(Application.persistentDataPath + "list.json"))
+        {
+            File.Delete(Application.persistentDataPath + "list.json");
+        }
+        if (File.Exists(Application.persistentDataPath + "chkEventList.json"))
+        {
+            File.Delete(Application.persistentDataPath + "chkEventList.json");
+        }
+        if (File.Exists(Application.persistentDataPath + "relation.json"))
+        {
+            File.Delete(Application.persistentDataPath + "relation.json");
+        }
+        if (File.Exists(Application.persistentDataPath + "currentIndex.json"))
+        {
+            File.Delete(Application.persistentDataPath + "currentIndex.json");
+        }
+        if (File.Exists(Application.persistentDataPath + "Question.json"))
+        {
+            File.Delete(Application.persistentDataPath + "Question.json");
+        }
+        
+    }
+
     int combineItem1, combineItem2;
     public void insertItem(int i)
     {
