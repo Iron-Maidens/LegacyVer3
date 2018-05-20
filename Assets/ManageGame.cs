@@ -27,6 +27,7 @@ public class ManageGame : MonoBehaviour
     public Text itemNum_text;
 
     public Text popUpDescription;
+    public Text popUpDescription2;
     public Text relationship;
 
     int[] relation = new int[10];
@@ -437,10 +438,12 @@ public class ManageGame : MonoBehaviour
                 currentHaveItem[curentNumberItem] = listAllImgItem[z];
                 chkItemList[z] = 1;
                 indexAllInventory[curentNumberItem++] = z;
+                popUpDescription.text = ThaiFontAdjuster.Adjust(itemDescription[z]);
+
                 Debug.Log("555555555555");
-                paneRecieveItem2.active = true;
-                imgReceivedItem2.sprite = listAllImgItem[z];
-                imgReceivedItem2r.sprite = listAllImgItem[k];
+                paneRecieveItem.active = true;
+                imgReceivedItem.sprite = listAllImgItem[z];
+         
                 //pop up item
             }
 
@@ -453,6 +456,10 @@ public class ManageGame : MonoBehaviour
                 currentHaveItem[curentNumberItem] = listAllImgItem[k];
                 chkItemList[k] = 1;
                 indexAllInventory[curentNumberItem++] = k;
+                popUpDescription2.text = ThaiFontAdjuster.Adjust(itemDescription[k]);
+
+                paneRecieveItem2.active = true;
+                imgReceivedItem2.sprite = listAllImgItem[k];
             }
         }
 
@@ -673,7 +680,7 @@ public class ManageGame : MonoBehaviour
 
 
         // level up 2
-        if (level == 2 && relation[6] >= 3)
+        if (level == 2 && chkEventList[49] == 1)
         {
             eventChk = 1;
             for (int i = 37; i < 42; i++)
