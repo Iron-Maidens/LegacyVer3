@@ -443,7 +443,9 @@ public class ManageGame : MonoBehaviour
                 Debug.Log("555555555555");
                 paneRecieveItem.active = true;
                 imgReceivedItem.sprite = listAllImgItem[z];
-         
+
+                setNullItem(1);
+          
                 //pop up item
             }
 
@@ -460,6 +462,8 @@ public class ManageGame : MonoBehaviour
 
                 paneRecieveItem2.active = true;
                 imgReceivedItem2.sprite = listAllImgItem[k];
+
+                setNullItem(2);
             }
         }
 
