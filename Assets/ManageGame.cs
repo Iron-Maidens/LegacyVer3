@@ -365,31 +365,31 @@ public class ManageGame : MonoBehaviour
         formula(10, 23, 13);
         formula(2, 2, 12);
         formula2(13, 17, 15, 16);
-        formula(41, 1, 24);
+        formula(1, 41, 24);
         formula(20, 18, 21);
         formula(12, 18, 25);
-        formula(16, 1, 27);
-        formula(27, 1, 28);
+        formula(1, 16, 27);
+        formula(1, 27, 28);
         formula2(3, 47, 29, 30);
         formula(29, 32, 43);
         formula(6, 18, 31);
         formula(47, 48, 32);
-        formula(37, 1, 33);
+        formula(1, 37, 33);
         formula(29, 42, 34);
         formula(5, 5, 36);
-        formula(15, 1, 26);
+        formula(1, 15, 26);
         formula(16, 19, 35);
         formula(3, 3, 22);
-        formula(26, 1, 50);
+        formula(1, 26, 50);
         formula(13, 42, 51);
         formula(26, 36, 55);
         formula(1, 29, 56);
-        formula(27, 1, 57);
+        formula(1, 27, 57);
     }
     int[] curentNumberItemJson = new int[2];
     public void formula(int x, int y, int z)
     {
-
+     
         if (chkItemList[z] == 0)
         {
             if (combineItem1 == x && combineItem2 == y)
