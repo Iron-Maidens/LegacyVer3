@@ -171,7 +171,7 @@ public class SetAllFile : MonoBehaviour {
         else
         {
             listImgItem = listPage[0].GetComponent<Image>();
-            listImgItem.sprite = listAllImgEvent[1];
+           // listImgItem.sprite = listAllImgEvent[1];
         }
 
     }
