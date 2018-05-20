@@ -342,8 +342,8 @@ public class ManageGame : MonoBehaviour
         {
             // Debug.Log(u + " " + chkItemList[u] + "\n");
         }
-        formula(2, 4, 7);
-        formula(0, 0, 8);
+        formula(2, 4, 7); 
+        formula(0, 0, 8);  
         formula(1, 8, 9);
         formula(7, 7, 10);
         formula(0, 2, 11);
@@ -367,7 +367,11 @@ public class ManageGame : MonoBehaviour
         formula(15, 1, 26);
         formula(16, 19, 35);
         formula(3, 3, 22);
-
+        //formula(26, 1, 50);
+        //formula(13, 42, 51);
+        //formula(26, 36, 55);
+        //formula(1, 29, 56);
+        //formula(27, 1, 57);
     }
     int[] curentNumberItemJson = new int[2];
     public void formula(int x, int y, int z)
