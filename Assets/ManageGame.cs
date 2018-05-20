@@ -13,13 +13,13 @@ public class ManageGame : MonoBehaviour
     public GameObject item2;
     public List<GameObject> listItem;
     public List<Sprite> listAllImgItem;
-    Sprite[] currentHaveItem = new Sprite[53];
-    int[] chkItemList = new int[53];
+    Sprite[] currentHaveItem = new Sprite[60];
+    int[] chkItemList = new int[60];
     int[] chkEventList = new int[20];
     int eventChk;
 
     int currentIndex = 0, curentNumberItem = 9;
-    int[] indexAllInventory = new int[53];
+    int[] indexAllInventory = new int[60];
 
     int level;
 
@@ -27,6 +27,7 @@ public class ManageGame : MonoBehaviour
     public Text itemNum_text;
 
     public Text popUpDescription;
+    public Text relationship;
 
     int[] relation = new int[10];
     public List<string> countries;
@@ -241,6 +242,7 @@ public class ManageGame : MonoBehaviour
         level_text.text = "Level " + level;
         itemNum_text.text = "Item " + curentNumberItem + " / 50";
         countryText.text = countries[indexCountry];
+        relationship.text = relation[indexCountry] + "";
         imgRelation.sprite = levelRelation[relation[indexCountry]];
 
         //chkEventPopup();
@@ -385,6 +387,7 @@ public class ManageGame : MonoBehaviour
                 chkItemList[z] = 1;
                 indexAllInventory[curentNumberItem++] = z;
                 chkEventPopup();
+                chkEventLvUp();
 
 
                 //pop up item
@@ -456,6 +459,181 @@ public class ManageGame : MonoBehaviour
 
     public void chkEventPopup()
     {
+        if (chkEventList[0] == 0 && chkItemList[13] == 1)
+        {
+            eventChk = 1;
+            //ทุกประเทศ
+            for (int i = 0; i < 10; i++)
+            {
+                if (relation[i] < 3) relation[i] += 1;
+            }
+            chkEventList[0] = 1;
+            //pop up event 0 have rice
+            eventPane[0].active = true;
+        }
+
+        if (chkEventList[1] == 0 && chkItemList[15] == 1)
+        {
+            eventChk = 1;
+            //เวียดนาม พม่า กัมพูชา
+            relation[0] += 1;
+            relation[2] += 1;
+            relation[6] += 1;
+            chkEventList[1] = 1;
+            //pop up event 1 แรกนา
+            eventPane[1].active = true;
+        }
+
+        if (chkEventList[2] == 0 && chkItemList[50] == 1)
+        {
+            eventChk = 1;
+            //พม่า ลาว อินโด เวียดนาม กัมพูชา
+            relation[0] += 1;
+            relation[2] += 1;
+            relation[3] += 1;
+            relation[5] += 1;
+            relation[6] += 1;
+            chkEventList[2] = 1;
+            //pop up event 1 ขนมจีน
+            eventPane[2].active = true;
+        }
+
+        //กัมพูชา 3+ มีข้าวตอก ถั่วลิสง น้ำตาล
+        if (chkEventList[3] == 0 && relation[6] == 3 && chkItemList[51] == 1 && chkItemList[52] == 1 && chkItemList[53] == 1)
+        {
+            eventChk = 1;
+            //add กระยาสารท
+            currentHaveItem[curentNumberItem] = listAllImgItem[54];
+            chkItemList[54] = 1;
+            indexAllInventory[curentNumberItem++] = 54;
+
+            chkEventList[3] = 1;
+            //pop up event 3 กระยาสารท
+            eventPane[3].active = true;
+        }
+
+        if (chkEventList[4] == 0 && chkItemList[55] == 1)
+        {
+            eventChk = 1;
+            //เวียดนาม ลาว
+            relation[0] += 1;
+            relation[5] += 1;
+
+            chkEventList[4] = 1;
+            //pop up event 4 ข้าวจี่
+            eventPane[4].active = true;
+        }
+
+        //พม่า
+        if (chkEventList[5] == 0 && relation[2] == 3)
+        {
+            eventChk = 1;
+            currentHaveItem[curentNumberItem] = listAllImgItem[58];
+            chkItemList[58] = 1;
+            indexAllInventory[curentNumberItem++] = 58;
+
+            chkEventList[5] = 1;
+            //pop up event 5 ข้าวมธุปายาท
+            eventPane[5].active = true;
+        }
+
+        if (chkEventList[6] == 0 && chkItemList[57] == 1)
+        {
+            eventChk = 1;
+            //เวียดนาม ลาว
+            relation[1] += 1;
+            relation[5] += 1;
+            relation[6] += 1;
+            relation[9] += 1;
+
+            chkEventList[6] = 1;
+            //pop up event 6 ข้าวหมาก
+            eventPane[6].active = true;
+        }
+
+        if (chkEventList[7] == 0 && chkItemList[28] == 1)
+        {
+            eventChk = 1;
+            //เวียดนาม ลาว
+            relation[3] += 1;
+            relation[0] += 1;
+            relation[7] += 1;
+            relation[1] += 1;
+
+            chkEventList[7] = 1;
+            //pop up event 7 ข้าวหลาม
+            //eventPane[7].active = true;
+        }
+
+        if (chkEventList[8] == 0 && relation[7] == 3)
+        {
+            eventChk = 1;
+            currentHaveItem[curentNumberItem] = listAllImgItem[59];
+            chkItemList[59] = 1;
+            indexAllInventory[curentNumberItem++] = 59;
+
+            chkEventList[8] = 1;
+            //pop up event 5 นาชิกเกอราบูซัมติง
+            //eventPane[8].active = true;
+        }
+
+        if (chkEventList[9] == 0 && chkItemList[56] == 1)
+        {
+            eventChk = 1;
+            //เวียดนาม ลาว
+            relation[9] += 1;
+            relation[0] += 1;
+            relation[2] += 1;
+            relation[5] += 1;
+            relation[6] += 1;
+
+            chkEventList[9] = 1;
+            //pop up event 9 น้ำปลา
+            //eventPane[9].active = true;
+        }
+
+        if (chkEventList[10] == 0 && chkItemList[43] == 1)
+        {
+            eventChk = 1;
+            //เวียดนาม ลาว
+            relation[9] += 1;
+            relation[0] += 1;
+            relation[5] += 1;
+            relation[2] += 1;
+            relation[3] += 1;
+            relation[6] += 1;
+            relation[7] += 1;
+
+            chkEventList[10] = 1;
+            //pop up event 10 ปลาร้า
+            //eventPane[10].active = true;
+        }
+
+        if (chkEventList[11] == 0 && level == 3 && chkItemList[26] == 1)
+        {
+            eventChk = 1;
+            //เวียดนาม ลาว
+
+            chkEventList[11] = 1;
+            //pop up event 11 พระแม่โพสพ
+            //eventPane[11].active = true;
+        }
+
+        if (chkEventList[12] == 0 && relation[3] == 3)
+        {
+            eventChk = 1;
+            currentHaveItem[curentNumberItem] = listAllImgItem[49];
+            chkItemList[49] = 1;
+            indexAllInventory[curentNumberItem++] = 49;
+
+            chkEventList[12] = 1;
+            //pop up event 12 เรือ
+            //eventPane[12].active = true;
+        }
+    }
+
+    public void chkEventLvUp()
+    {
         // level up 1
         if (level == 1 && chkEventList[2] == 1)
         {
@@ -467,14 +645,21 @@ public class ManageGame : MonoBehaviour
                 indexAllInventory[curentNumberItem++] = i;
             }
 
+            for (int i = 52; i < 54; i++)
+            {
+                currentHaveItem[curentNumberItem] = listAllImgItem[i];
+                chkItemList[i] = 1;
+                indexAllInventory[curentNumberItem++] = i;
+            }
+
             level += 1;
             //pop up event
             paneUpLevel.active = true;
 
-
         }
-        // level up 2
 
+
+        // level up 2
         if (level == 2 && relation[6] >= 3)
         {
             eventChk = 1;
@@ -491,82 +676,7 @@ public class ManageGame : MonoBehaviour
 
         }
 
-        if (chkEventList[0] == 0 && chkItemList[31] == 1 && chkItemList[39] == 1 && relation[6] >= 3)
-        {
-            eventChk = 1;
-            currentHaveItem[curentNumberItem] = listAllImgItem[44];
-            chkItemList[44] = 1;
-            indexAllInventory[curentNumberItem++] = 44;
-
-            chkEventList[0] = 1;
-
-            //pop up event 0
-            eventPane[0].active = true;
-        }
-
-        if (chkEventList[1] == 0 && chkItemList[30] == 1 && chkItemList[39] == 1 && chkItemList[41] == 1 && relation[8] >= 3)
-        {
-            eventChk = 1;
-            currentHaveItem[curentNumberItem] = listAllImgItem[45];
-            chkItemList[45] = 1;
-            indexAllInventory[curentNumberItem++] = 45;
-            chkEventList[1] = 1;
-
-            //pop up event 1
-            eventPane[1].active = true;
-        }
-
-        if (chkEventList[2] == 0 && chkItemList[13] == 1)
-        {
-            eventChk = 1;
-            for (int i = 0; i < 10; i++)
-            {
-                if (relation[i] < 3) relation[i] += 1;
-            }
-            chkEventList[2] = 1;
-            //pop up event 2 rice
-            eventPane[2].active = true;
-        }
-
-        if (chkEventList[3] == 0 && chkItemList[43] == 1)
-        {
-            eventChk = 1;
-            if (relation[2] < 3) relation[2] += 1;
-            if (relation[6] < 3) relation[6] += 1;
-            chkEventList[3] = 1;
-            //pop up event 3 pra ra
-            eventPane[3].active = true;
-        }
-
-        if (chkEventList[4] == 0 && chkItemList[34] == 1 && chkItemList[35] == 1 && relation[1] == 3)
-        {
-            eventChk = 1;
-            currentHaveItem[curentNumberItem] = listAllImgItem[46];
-            chkItemList[46] = 1;
-            indexAllInventory[curentNumberItem++] = 46;
-
-            chkEventList[4] = 1;
-            //pop up event 4
-            eventPane[4].active = true;
-        }
-
-        if (chkEventList[5] == 0 && chkItemList[43] == 1 && false)
-        {
-            eventChk = 1;
-            if (relation[0] < 3) relation[0] += 1;
-            //pop up event 5 corpse
-            chkEventList[5] = 1;
-            eventPane[5].active = true;
-        }
-
-        if (chkEventList[6] == 0 && chkItemList[4] == 1 && chkItemList[15] == 1)
-        {
-            eventChk = 1;
-            if (relation[6] < 3) relation[6] += 1;
-            //pop up event 5 buffalo
-            chkEventList[6] = 1;
-            eventPane[6].active = true;
-        }
+        
     }
 
     public void onClickList(int indexList)
