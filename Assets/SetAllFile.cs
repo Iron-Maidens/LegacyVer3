@@ -220,7 +220,7 @@ public class SetAllFile : MonoBehaviour {
     {
         firstcome = 0;
         formula(2, 4, 7);
-        formula(0, 1, 8);
+        formula(0, 0, 8);
         formula(1, 8, 9);
         formula(7, 7, 10);
         formula(0, 2, 11);
@@ -228,22 +228,31 @@ public class SetAllFile : MonoBehaviour {
         formula(9, 14, 23);
         formula(10, 23, 13);
         formula(2, 2, 12);
-        formula(41, 1, 24);
+        formula(13, 17, 15);
+        formula(13, 17, 16);
+        formula(1, 41, 24);
         formula(20, 18, 21);
         formula(12, 18, 25);
-        formula(16, 1, 27);
-        formula(27, 1, 28);
+        formula(1, 16, 27);
+        formula(1, 27, 28);
+        formula(3, 47, 29);
+        formula(3, 47, 30);
         formula(29, 32, 43);
         formula(6, 18, 31);
         formula(47, 48, 32);
-        formula(37, 1, 33);
+        formula(1, 37, 33);
         formula(29, 42, 34);
         formula(5, 5, 36);
-        formula(15, 1, 26);
+        formula(1, 15, 26);
         formula(16, 19, 35);
         formula(3, 3, 22);
-        formula(47, 3, 30);
-        formula(47, 3, 29);
+        formula(1, 26, 50);
+        formula(13, 42, 51);
+        formula(26, 36, 55);
+        formula(1, 29, 56);
+        formula(1, 27, 57);
+
+
 
     }
     public void formula(int x,int y,int z)
