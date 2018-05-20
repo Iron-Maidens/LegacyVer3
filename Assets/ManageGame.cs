@@ -252,7 +252,7 @@ public class ManageGame : MonoBehaviour
     void Update()
     {
         level_text.text = "Level " + level;
-        itemNum_text.text = "Item " + curentNumberItem + " / 50";
+        itemNum_text.text = "Item " + curentNumberItem + " / 70";
         countryText.text = countries[indexCountry];
         relationship.text = relation[indexCountry] + "";
         imgRelation.sprite = levelRelation[relation[indexCountry]];
