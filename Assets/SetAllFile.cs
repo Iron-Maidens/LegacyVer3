@@ -18,10 +18,10 @@ public class SetAllFile : MonoBehaviour {
     int currentPage = 1;
     Image listImgItem;
     public int mode;
+    public static int curr;
 
-    
     int countEvent = 0;
-    int[] inventoryEvent = new int[10];
+    int[] inventoryEvent = new int[13];
     int pageEvent = 1;
     void Start () {
         path = Application.persistentDataPath + "list.json";
@@ -46,7 +46,7 @@ public class SetAllFile : MonoBehaviour {
         pageEvent = 1;
         countEvent = 0;
         numbers = JsonHelper.getJsonArray<int>(f3);
-        for (int i=0 ; i<10 ; i++)
+        for (int i=0 ; i<13 ; i++)
         {
             if(numbers[i]==1)
             {
@@ -131,8 +131,15 @@ public class SetAllFile : MonoBehaviour {
         itemDescription[49] = "เรือ";
     }
     // Update is called once per frame
+    int[] cur2 = new int[1];
+    string json;
+    string path2;
     void Update () {
         staticCurrentItem = curentNumberItem;
+        curr = pageEvent;
+        cur2[0] = pageEvent;
+        Debug.Log(cur2[0] + "     "+ pageEvent);
+        //ww
 
     }
     public void onClickNextEvent()
@@ -142,6 +149,10 @@ public class SetAllFile : MonoBehaviour {
             pageEvent++;
             updatePageEvent();
         }
+        cur2[0] = pageEvent;
+        path2 = Application.persistentDataPath + "page.json";
+        json = JsonHelper.arrayToJson(cur2);
+        File.WriteAllText(path2, json);
     }
     public void onClickBackEvent()
     {
@@ -150,14 +161,18 @@ public class SetAllFile : MonoBehaviour {
             pageEvent--;
             updatePageEvent();
         }
+        cur2[0] = pageEvent;
+        path2 = Application.persistentDataPath + "page.json";
+        json = JsonHelper.arrayToJson(cur2);
+        File.WriteAllText(path2, json);
     }
     public void updatePageEvent()
     {
         pageText.text = "Page: " + pageEvent;
         if (countEvent!=0)
         {
-            int c = 1;
-            for(int i=1;i<10;i++)
+            int c = 0;
+            for(int i=0;i<13;i++)
             {
                 if (inventoryEvent[i] == 1)
                 {
