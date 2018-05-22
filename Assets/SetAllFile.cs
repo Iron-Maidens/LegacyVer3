@@ -249,7 +249,7 @@ public class SetAllFile : MonoBehaviour {
         formula(20, 18, 21);
         formula(12, 18, 25);
         formula(1, 16, 27);
-        formula(1, 27, 28);
+        formula(21, 27, 28);
         formula(3, 47, 29);
         formula(3, 47, 30);
         formula(29, 32, 43);
